@@ -1,19 +1,25 @@
-import { getProjects } from "@/lib/api"; 
+import ContactForm from "@/componets/ContactForm";
+import Hero from "@/componets/Hero";
+import ProjectList from "@/componets/ProjectList";
+import { getProjects } from "@/lib/api";
+
 export default async function Home() {
   const projects = await getProjects();
 
   return (
-    <main className="p-10">
-      <h1 className="text-4xl font-bold mb-6">My Projects</h1>
+    <main className="p-24 p-10">
+      <Hero />
 
-      <div className="grid grid-cols-3 gap-6">
-        {projects.map((p: any) => (
-          <div key={p._id} className="p-4 border rounded-xl">
-            <h2 className="text-xl font-semibold">{p.title}</h2>
-            <p>{p.description}</p>
-          </div>
-        ))}
-      </div>
+      <h2 className="text-3xl mb-6 bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text">
+        Projects
+      </h2>
+      <section id="projects">
+        <ProjectList projects={projects} />
+
+      </section>
+      <section id="contact">
+        <ContactForm />
+      </section>
     </main>
   );
 }
